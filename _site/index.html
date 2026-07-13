@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Home | VSX Press</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="Home" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Jekyll theme to quick launch vscode extension site via README; seo friendly" />
+<meta name="twitter:description" property="og:description" content="Jekyll theme to quick launch vscode extension site via README; seo friendly" />
+<link rel="canonical" href="/" />
+<meta property="og:url" content="/" />
+<meta property="og:site_name" content="VSX Press" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Home" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Jekyll theme to quick launch vscode extension site via README; seo friendly","headline":"Home","name":"VSX Press","url":"/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></head>
+
+  <body>
+    <header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">
+      <img src="https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png" alt="Logo" class="header-logo">
+      VSX Press
+    </a>
+    <nav class="site-nav">
+      <div class="trigger">
+        <a class="page-link" href="https://marketplace.visualstudio.com/items?itemName=AwesomePublisher.AwesomeExtension" target="_blank">VS Code Marketplace</a>
+        <a class="page-link" href="https://github.com/rahuldhole/vsx-press" target="_blank">GitHub</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home-layout">
+  <aside class="sidebar">
+    <div class="extension-icon">
+      <img src="https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png" alt="Extension Icon">
+    </div>
+    
+    <h1 class="extension-title">Awesome Extension</h1>
+    <p class="publisher">AwesomePublisher</p>
+    
+    <div class="stats">
+      <span class="installs"><i class="icon-download"></i> 10K+</span>
+      <span class="rating"><i class="icon-star"></i> 4.9</span>
+    </div>
+
+    <div class="install-command">
+      <code id="install-code">ext install AwesomePublisher.awesome-extension</code>
+      <button class="copy-btn" onclick="copyInstall()">Copy</button>
+    </div>
+
+    <div class="links">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="https://marketplace.visualstudio.com/items?itemName=AwesomePublisher.AwesomeExtension" target="_blank">Marketplace</a></li>
+        <li><a href="https://github.com/rahuldhole/vsx-press" target="_blank">Repository</a></li>
+        <li><a href="https://github.com/rahuldhole/vsx-press/blob/main/LICENSE" target="_blank">License (MIT)</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <article class="main-content readme-content">
+    <p>Welcome to VSX Press! This text will be replaced by your extension’s actual README content when using this theme.</p>
+
+<h2 id="features">Features</h2>
+
+<ul>
+  <li><strong>SEO Friendly:</strong> Built-in SEO tags to make your extension discoverable.</li>
+  <li><strong>Responsive Design:</strong> Looks great on mobile, tablet, and desktop.</li>
+  <li><strong>VS Code Aesthetic:</strong> Familiar UI elements mimicking the VS Code marketplace.</li>
+  <li><strong>Zero Config:</strong> Just use your existing <code class="language-plaintext highlighter-rouge">README.md</code>.</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ext <span class="nb">install </span>AwesomePublisher.AwesomeExtension
+</code></pre></div></div>
+
+  </article>
+</div>
+
+<script>
+function copyInstall() {
+  const code = document.getElementById('install-code').innerText;
+  navigator.clipboard.writeText(code);
+  const btn = document.querySelector('.copy-btn');
+  btn.innerText = 'Copied!';
+  setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+}
+</script>
+
+      </div>
+    </main>
+    <footer class="site-footer h-card">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p>&copy; 2026 AwesomePublisher. All rights reserved.</p>
+      </div>
+      <div class="footer-col footer-col-2">
+        <p>Built with <a href="https://github.com/rahuldhole/vsx-press">VSX Press</a> Jekyll Theme.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

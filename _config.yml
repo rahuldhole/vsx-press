@@ -1,0 +1,32 @@
+title: VSX Press
+email: mail@rahuldhole.com
+description: >-
+  Jekyll theme to quick launch vscode extension site via README; seo friendly
+baseurl: ""
+url: ""
+
+# Theme settings
+theme_settings:
+  extension_name: "Awesome Extension"
+  publisher: "AwesomePublisher"
+  marketplace_url: "https://marketplace.visualstudio.com/items?itemName=AwesomePublisher.AwesomeExtension"
+  github_repo: "https://github.com/rahuldhole/vsx-press"
+  version: "1.0.0"
+  installs: "10K+"
+  rating: "4.9"
+  license: "MIT"
+  accent_color: "#007acc"
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

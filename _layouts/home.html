@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+<div class="home-layout">
+  <aside class="sidebar">
+    <div class="extension-icon">
+      <img src="https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png" alt="Extension Icon">
+    </div>
+    
+    <h1 class="extension-title">{{ site.theme_settings.extension_name }}</h1>
+    <p class="publisher">{{ site.theme_settings.publisher }}</p>
+    
+    <div class="stats">
+      <span class="installs"><i class="icon-download"></i> {{ site.theme_settings.installs }}</span>
+      <span class="rating"><i class="icon-star"></i> {{ site.theme_settings.rating }}</span>
+    </div>
+
+    <div class="install-command">
+      <code id="install-code">ext install {{ site.theme_settings.publisher }}.{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}</code>
+      <button class="copy-btn" onclick="copyInstall()">Copy</button>
+    </div>
+
+    <div class="links">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="{{ site.theme_settings.marketplace_url }}" target="_blank">Marketplace</a></li>
+        <li><a href="{{ site.theme_settings.github_repo }}" target="_blank">Repository</a></li>
+        <li><a href="{{ site.theme_settings.github_repo }}/blob/main/LICENSE" target="_blank">License ({{ site.theme_settings.license }})</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <article class="main-content readme-content">
+    {{ content }}
+  </article>
+</div>
+
+<script>
+function copyInstall() {
+  const code = document.getElementById('install-code').innerText;
+  navigator.clipboard.writeText(code);
+  const btn = document.querySelector('.copy-btn');
+  btn.innerText = 'Copied!';
+  setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+}
+</script>

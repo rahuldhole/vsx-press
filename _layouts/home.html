@@ -4,34 +4,134 @@ layout: default
 
 <div class="grid">
   <div>
-    <article>
-      <div style="text-align: center; margin-bottom: 1rem;">
-        <img src="{{ site.theme_settings.icon_url | default: 'https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png' }}" alt="Extension Icon" style="width: 96px; height: 96px; border-radius: 12px;">
-      </div>
-      
-      <h2 style="text-align: center; margin-bottom: 0;">{{ site.theme_settings.extension_name }}</h2>
-      <p style="text-align: center; color: var(--pico-muted-color);"><small>{{ site.theme_settings.publisher }}</small></p>
-      
-      <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; color: var(--pico-muted-color);">
-        <span><small><i class="icon-download"></i> {{ site.theme_settings.installs }}</small></span>
-        <span><small><i class="icon-star"></i> {{ site.theme_settings.rating }}</small></span>
+    <article class="vsx-sidebar">
+      <!-- Extension Icon -->
+      <div>
+        <img class="vsx-sidebar__icon" src="{{ site.theme_settings.icon_url | default: 'https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png' }}" alt="{{ site.theme_settings.extension_name }} Icon">
       </div>
 
-      <div style="margin-bottom: 1.5rem;">
-        <code id="install-code" style="display: block; text-align: center; margin-bottom: 0.5rem; padding: 0.5rem;">ext install {{ site.theme_settings.publisher }}.{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}</code>
-        <button class="copy-btn outline" onclick="copyInstall()" style="width: 100%;">Copy Command</button>
+      <!-- Extension Name & Publisher -->
+      <h2 class="vsx-sidebar__name">{{ site.theme_settings.extension_name }}</h2>
+      <p class="vsx-sidebar__publisher"><small>{{ site.theme_settings.publisher }}</small></p>
+
+      <!-- Stats: Installs & Rating -->
+      <div class="vsx-stats">
+        <span class="vsx-stats__item">
+          <span class="vsx-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </span>
+          {{ site.theme_settings.installs }}
+        </span>
+        <span class="vsx-stats__item">
+          <span class="vsx-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </span>
+          {{ site.theme_settings.rating }}
+        </span>
+        {% if site.theme_settings.license %}
+        <span class="vsx-stats__item">
+          <span class="vsx-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+          </span>
+          {{ site.theme_settings.license }}
+        </span>
+        {% endif %}
       </div>
 
-      <nav>
-        <ul>
-          <li><strong>Resources</strong></li>
+      <!-- Install Buttons -->
+      <div class="vsx-actions">
+        <!-- Install in VS Code (opens vscode: URI) -->
+        <a href="vscode:extension/{{ site.theme_settings.publisher | downcase }}.{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}" class="vsx-btn vsx-btn--primary">
+          <span class="vsx-icon">
+            <svg viewBox="0 0 24 24"><path d="M17.583 2.603L12 7.596l-5.583-4.993L1 7.596v8.808l5.417 4.993L12 16.404l5.583 4.993L23 16.404V7.596l-5.417-4.993zM6.417 18.086L3 15.093V8.907l3.417-3.006 4.166 3.723-4.166 8.462zm11.166 0l-4.166-8.462 4.166-3.723L21 8.907v6.186l-3.417 2.993z"/></svg>
+          </span>
+          Install in VS Code
+        </a>
+
+        <!-- Open in VS Code Marketplace -->
+        <a href="{{ site.theme_settings.marketplace_url }}" target="_blank" class="vsx-btn vsx-btn--secondary">
+          <span class="vsx-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 3h8v2H5v14h14v-6h2v8H3V3zm16 0h-6v2h2.586l-7.293 7.293 1.414 1.414L17 6.414V9h2V3z"/></svg>
+          </span>
+          VS Code Marketplace
+        </a>
+
+        <!-- Open VSX Registry -->
+        {% if site.theme_settings.openvsx_url %}
+        <a href="{{ site.theme_settings.openvsx_url }}" target="_blank" class="vsx-btn vsx-btn--outline">
+          <span class="vsx-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </span>
+          Open VSX Registry
+        </a>
+        {% else %}
+        <a href="https://open-vsx.org/extension/{{ site.theme_settings.publisher | downcase }}/{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}" target="_blank" class="vsx-btn vsx-btn--outline">
+          <span class="vsx-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </span>
+          Open VSX Registry
+        </a>
+        {% endif %}
+      </div>
+
+      <!-- Install Command -->
+      <div class="vsx-install-cmd">
+        <code id="install-code">ext install {{ site.theme_settings.publisher }}.{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}</code>
+        <button class="vsx-install-cmd__copy" onclick="copyInstall()" aria-label="Copy install command" title="Copy to clipboard">
+          <span class="vsx-icon vsx-icon--lg" id="copy-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- Resources Links -->
+      <div class="vsx-resources">
+        <div class="vsx-resources__title">Resources</div>
+        <ul class="vsx-resources__list">
+          <li>
+            <a href="{{ site.theme_settings.marketplace_url }}" target="_blank">
+              <span class="vsx-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+              </span>
+              Marketplace
+            </a>
+          </li>
+          <li>
+            <a href="{{ site.theme_settings.github_repo }}" target="_blank">
+              <span class="vsx-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </span>
+              Repository
+            </a>
+          </li>
+          <li>
+            <a href="{{ site.theme_settings.github_repo }}/blob/main/CHANGELOG.md" target="_blank">
+              <span class="vsx-icon">
+                <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 00-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0013 21a9 9 0 000-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+              </span>
+              Changelog
+            </a>
+          </li>
+          <li>
+            <a href="{{ site.theme_settings.github_repo }}/blob/main/LICENSE" target="_blank">
+              <span class="vsx-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+              </span>
+              License ({{ site.theme_settings.license }})
+            </a>
+          </li>
+          {% if site.theme_settings.github_repo %}
+          <li>
+            <a href="{{ site.theme_settings.github_repo }}/issues" target="_blank">
+              <span class="vsx-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              </span>
+              Report Issue
+            </a>
+          </li>
+          {% endif %}
         </ul>
-        <ul>
-          <li><a href="{{ site.theme_settings.marketplace_url }}" target="_blank">Marketplace</a></li>
-          <li><a href="{{ site.theme_settings.github_repo }}" target="_blank">Repository</a></li>
-          <li><a href="{{ site.theme_settings.github_repo }}/blob/main/LICENSE" target="_blank">License ({{ site.theme_settings.license }})</a></li>
-        </ul>
-      </nav>
+      </div>
     </article>
   </div>
 
@@ -45,9 +145,16 @@ layout: default
 <script>
 function copyInstall() {
   const code = document.getElementById('install-code').innerText;
-  navigator.clipboard.writeText(code);
-  const btn = document.querySelector('.copy-btn');
-  btn.innerText = 'Copied!';
-  setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+  navigator.clipboard.writeText(code).then(() => {
+    const iconEl = document.getElementById('copy-icon');
+    const originalSvg = iconEl.innerHTML;
+    // Show checkmark
+    iconEl.innerHTML = '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+    iconEl.style.color = '#22c55e';
+    setTimeout(() => {
+      iconEl.innerHTML = originalSvg;
+      iconEl.style.color = '';
+    }, 2000);
+  });
 }
 </script>

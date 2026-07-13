@@ -1,0 +1,316 @@
+/* ==========================================================================
+   VSX Press - Custom Theme Styles
+   ========================================================================== */
+
+/* ---------- Root & Variables ---------- */
+:root {
+  --vsx-accent: {{ site.theme_settings.accent_color | default: "#007acc" }};
+  --vsx-radius: 10px;
+  --vsx-sidebar-width: 320px;
+  --vsx-icon-size: 1em;
+}
+
+/* ---------- Global ---------- */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- Inline SVG Icon System ---------- */
+.vsx-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--vsx-icon-size);
+  height: var(--vsx-icon-size);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.vsx-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.vsx-icon--lg {
+  --vsx-icon-size: 1.25em;
+}
+
+.vsx-icon--xl {
+  --vsx-icon-size: 1.5em;
+}
+
+/* ---------- Sidebar Card ---------- */
+.vsx-sidebar {
+  text-align: center;
+}
+
+.vsx-sidebar__icon {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.vsx-sidebar__name {
+  margin-bottom: 0.15rem;
+}
+
+.vsx-sidebar__publisher {
+  color: var(--pico-muted-color);
+  margin-bottom: 1rem;
+}
+
+/* ---------- Stats Row ---------- */
+.vsx-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+
+.vsx-stats__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.vsx-stats__item .vsx-icon {
+  opacity: 0.7;
+}
+
+/* ---------- Install / Action Buttons ---------- */
+.vsx-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.vsx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--vsx-radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.vsx-btn .vsx-icon {
+  --vsx-icon-size: 1.1em;
+}
+
+/* Primary: Install in VS Code */
+.vsx-btn--primary {
+  background: #0066b8;
+  color: #fff;
+  border-color: #0066b8;
+}
+
+.vsx-btn--primary:hover {
+  background: #005a9e;
+  border-color: #005a9e;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,102,184,0.35);
+}
+
+/* Secondary: Open VSX */
+.vsx-btn--secondary {
+  background: transparent;
+  color: var(--pico-primary);
+  border-color: var(--pico-primary);
+}
+
+.vsx-btn--secondary:hover {
+  background: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Outline: GitHub, Copy, etc. */
+.vsx-btn--outline {
+  background: transparent;
+  color: var(--pico-color);
+  border-color: var(--pico-muted-border-color);
+}
+
+.vsx-btn--outline:hover {
+  border-color: var(--pico-color);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* ---------- Install Command Block ---------- */
+.vsx-install-cmd {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.vsx-install-cmd code {
+  display: block;
+  padding: 0.65rem 3rem 0.65rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: var(--vsx-radius);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.vsx-install-cmd__copy {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: var(--pico-muted-color);
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.vsx-install-cmd__copy:hover {
+  color: var(--pico-color);
+}
+
+/* ---------- Resources Nav ---------- */
+.vsx-resources {
+  text-align: left;
+}
+
+.vsx-resources__title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--pico-muted-color);
+  margin-bottom: 0.5rem;
+}
+
+.vsx-resources__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vsx-resources__list li {
+  padding: 0;
+  margin: 0;
+}
+
+.vsx-resources__list a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  font-size: 0.875rem;
+  color: var(--pico-color);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.vsx-resources__list a:hover {
+  color: var(--pico-primary);
+}
+
+.vsx-resources__list .vsx-icon {
+  opacity: 0.5;
+}
+
+/* ---------- README Content ---------- */
+.readme-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--vsx-radius);
+}
+
+.readme-content h2 {
+  margin-top: 2rem;
+}
+
+/* ---------- Header ---------- */
+.vsx-header__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.vsx-header__logo img {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  border-radius: 6px;
+}
+
+.vsx-header__nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+}
+
+/* Theme toggle */
+.vsx-theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem;
+  color: var(--pico-color);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.vsx-theme-toggle:hover {
+  background: var(--pico-muted-border-color);
+}
+
+/* Show/hide sun/moon based on theme */
+[data-theme="dark"] .vsx-theme-toggle__sun { display: inline-flex; }
+[data-theme="dark"] .vsx-theme-toggle__moon { display: none; }
+[data-theme="light"] .vsx-theme-toggle__sun { display: none; }
+[data-theme="light"] .vsx-theme-toggle__moon { display: inline-flex; }
+
+/* Default (no theme set) — follow prefers-color-scheme */
+:root:not([data-theme]) .vsx-theme-toggle__sun { display: none; }
+:root:not([data-theme]) .vsx-theme-toggle__moon { display: inline-flex; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .vsx-theme-toggle__sun { display: inline-flex; }
+  :root:not([data-theme]) .vsx-theme-toggle__moon { display: none; }
+}
+
+/* ---------- Footer ---------- */
+.vsx-footer {
+  margin-top: calc(var(--pico-spacing) * 3);
+  text-align: center;
+  color: var(--pico-muted-color);
+}
+
+/* ---------- Responsive: Stack sidebar on mobile ---------- */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .grid > *:nth-child(2) {
+    grid-column: span 1 !important;
+  }
+}

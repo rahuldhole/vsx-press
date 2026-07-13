@@ -1,0 +1,27 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Install Ruby gem dependencies
+    cmds:
+      - bundle install
+
+  serve:
+    desc: Start the local Jekyll server for testing
+    cmds:
+      - bundle exec jekyll serve
+
+  build:
+    desc: Build the Jekyll site for production
+    cmds:
+      - bundle exec jekyll build
+
+  clean:
+    desc: Clean the _site directory
+    cmds:
+      - bundle exec jekyll clean
+
+  default:
+    desc: Default task to start the local server
+    cmds:
+      - task: serve

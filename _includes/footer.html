@@ -1,12 +1,25 @@
-<footer class="site-footer h-card">
-  <div class="wrapper">
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <p>&copy; {{ site.time | date: "%Y" }} {{ site.theme_settings.publisher }}. All rights reserved.</p>
-      </div>
-      <div class="footer-col footer-col-2">
-        <p>Built with <a href="https://github.com/rahuldhole/vsx-press">VSX Press</a> Jekyll Theme.</p>
-      </div>
+<footer class="container" style="margin-top: calc(var(--pico-spacing) * 3); text-align: center; color: var(--pico-muted-color);">
+  <hr>
+  <div class="grid">
+    <div>
+      <small>&copy; {{ site.time | date: "%Y" }} {{ site.theme_settings.publisher }}. All rights reserved.</small>
+    </div>
+    <div>
+      <small>Built with <a class="secondary" href="https://github.com/rahuldhole/vsx-press">VSX Press</a> Jekyll Theme.</small>
     </div>
   </div>
 </footer>
+<script>
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (!currentTheme) {
+        currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+</script>

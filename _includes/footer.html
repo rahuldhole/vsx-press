@@ -1,22 +1,33 @@
-<footer class="container vsx-footer">
-  <hr>
-  <div class="grid">
-    <div>
-      <small>&copy; {{ site.time | date: "%Y" }} {{ site.theme_settings.publisher }}. All rights reserved.</small>
+<footer class="page-footer white z-depth-1" style="margin-top: 4rem;">
+  <div class="footer-copyright white">
+    <div class="container black-text center-align">
+      &copy; {{ site.time | date: "%Y" }} {{ site.theme_settings.publisher }}. All rights reserved.
     </div>
   </div>
 </footer>
+<script src="{{ "/assets/vendor/js/materialize.min.js" | relative_url }}"></script>
 <script>
+  // Initialize Materialize components
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    if (typeof M !== 'undefined') {
+      M.Sidenav.init(elems);
+    }
+  });
+
   const toggleBtn = document.getElementById('theme-toggle');
   if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      let currentTheme = document.documentElement.getAttribute('data-theme');
-      if (!currentTheme) {
-        currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    toggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      let isDark = document.documentElement.classList.contains('dark-theme');
+      
+      if (isDark) {
+        document.documentElement.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
       }
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
     });
   }
 </script>

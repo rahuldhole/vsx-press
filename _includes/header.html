@@ -1,42 +1,25 @@
-<header class="container" role="banner" style="margin-top: var(--pico-spacing);">
-  <nav>
-    <ul>
-      <li>
-        <a class="contrast vsx-header__logo" rel="author" href="{{ "/" | relative_url }}">
-          <img src="{{ site.theme_settings.icon_url | default: 'https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png' }}" alt="Logo">
-          <strong>{{ site.title | escape }}</strong>
-        </a>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <a class="secondary vsx-header__nav-link" href="{{ site.theme_settings.marketplace_url }}" target="_blank">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/vscode.svg' | relative_url }}" alt="VS Code">
-          </span>
-          Marketplace
-        </a>
-      </li>
-      <li>
-        <a class="secondary vsx-header__nav-link" href="{{ site.theme_settings.github_repo }}" target="_blank">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/github.svg' | relative_url }}" alt="GitHub">
-          </span>
-          GitHub
-        </a>
-      </li>
-      <li>
-        <button id="theme-toggle" class="vsx-theme-toggle" aria-label="Toggle dark/light theme">
-          <!-- Sun icon (shown in dark mode → click to go light) -->
-          <span class="vsx-icon vsx-icon--lg vsx-theme-toggle__sun">
-            <img src="{{ '/assets/icons/sun.svg' | relative_url }}" alt="Light mode">
-          </span>
-          <!-- Moon icon (shown in light mode → click to go dark) -->
-          <span class="vsx-icon vsx-icon--lg vsx-theme-toggle__moon">
-            <img src="{{ '/assets/icons/moon.svg' | relative_url }}" alt="Dark mode">
-          </span>
-        </button>
-      </li>
-    </ul>
+<div class="navbar-fixed">
+  <nav class="white z-depth-1">
+    <div class="nav-wrapper container">
+      <a href="{{ "/" | relative_url }}" class="brand-logo black-text" style="display: flex; align-items: center; height: 100%;">
+        <img src="{{ site.theme_settings.icon_url | default: 'https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png' }}" alt="Logo" style="width: 32px; height: 32px; margin-right: 12px; border-radius: 4px;">
+        <span style="font-weight: 500; font-size: 1.2rem;">{{ site.title | escape }}</span>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="{{ site.theme_settings.marketplace_url }}" target="_blank" class="black-text" style="display: flex; align-items: center;">
+            <i class="material-icons left">store</i>Marketplace
+          </a>
+        </li>
+        <li>
+          <a href="{{ site.theme_settings.github_repo }}" target="_blank" class="black-text" style="display: flex; align-items: center;">
+            <i class="material-icons left">code</i>GitHub
+          </a>
+        </li>
+        <li>
+          <a href="#" id="theme-toggle" class="black-text"><i class="material-icons" id="theme-icon">brightness_4</i></a>
+        </li>
+      </ul>
+    </div>
   </nav>
-</header>
+</div>

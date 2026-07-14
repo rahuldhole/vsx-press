@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
   {% include head.html %}
-  <body>
+  <body class="grey lighten-5">
     {% include header.html %}
-    <main class="container" aria-label="Content">
+    <main class="container" style="margin-top: 2rem; margin-bottom: 4rem; min-height: 80vh;" aria-label="Content">
       {{ content }}
     </main>
     {% include footer.html %}

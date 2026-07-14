@@ -2,143 +2,76 @@
 layout: default
 ---
 
-<div class="grid">
-  <div>
-    <article class="vsx-sidebar">
-      <!-- Extension Icon -->
-      <div>
-        <img class="vsx-sidebar__icon" src="{{ site.theme_settings.icon_url | default: 'https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png' }}" alt="{{ site.theme_settings.extension_name }} Icon">
+<div class="row">
+  <!-- Sidebar -->
+  <div class="col s12 l4">
+    <div class="card" style="position: sticky; top: 5rem;">
+      <div class="card-content center-align">
+        <!-- Extension Icon -->
+        <img src="{{ site.theme_settings.icon_url | default: 'https://microsoft.gallerycdn.vsassets.io/extensions/microsoft/visualstudio/1.0.0/1681231231/1/Microsoft.VisualStudio.png' }}" alt="{{ site.theme_settings.extension_name }} Icon" class="z-depth-1" style="width: 96px; height: 96px; border-radius: 12px; margin-bottom: 1rem;">
+        
+        <!-- Extension Name & Publisher -->
+        <span class="card-title" style="font-weight: 500;">{{ site.theme_settings.extension_name }}</span>
+        <p class="grey-text">{{ site.theme_settings.publisher }}</p>
+
+        <!-- Stats -->
+        <div style="display: flex; justify-content: center; gap: 1rem; margin: 1.5rem 0;" class="grey-text text-darken-1">
+          <span style="display: flex; align-items: center;"><i class="material-icons tiny" style="margin-right: 4px;">file_download</i> {{ site.theme_settings.installs }}</span>
+          <span style="display: flex; align-items: center;"><i class="material-icons tiny amber-text text-darken-1" style="margin-right: 4px;">star</i> {{ site.theme_settings.rating }}</span>
+          {% if site.theme_settings.license %}
+          <span style="display: flex; align-items: center;"><i class="material-icons tiny" style="margin-right: 4px;">verified_user</i> {{ site.theme_settings.license }}</span>
+          {% endif %}
+        </div>
+
+        <!-- Buttons -->
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
+          <a href="vscode:extension/{{ site.theme_settings.publisher | downcase }}.{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}" class="waves-effect waves-light btn blue darken-2" style="display: flex; align-items: center; justify-content: center;">
+            <i class="material-icons left">add_to_queue</i>Install in VS Code
+          </a>
+          <a href="{{ site.theme_settings.marketplace_url }}" target="_blank" class="waves-effect waves-blue btn-flat grey lighten-4" style="border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center;">
+            <i class="material-icons left">store</i>Marketplace
+          </a>
+          {% if site.theme_settings.openvsx_url %}
+          <a href="{{ site.theme_settings.openvsx_url }}" target="_blank" class="waves-effect waves-blue btn-flat grey lighten-4" style="border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center;">
+            <i class="material-icons left">public</i>Open VSX Registry
+          </a>
+          {% else %}
+          <a href="https://open-vsx.org/extension/{{ site.theme_settings.publisher | downcase }}/{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}" target="_blank" class="waves-effect waves-blue btn-flat grey lighten-4" style="border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center;">
+            <i class="material-icons left">public</i>Open VSX Registry
+          </a>
+          {% endif %}
+        </div>
+
+        <!-- CLI Install -->
+        <div class="left-align">
+          <label style="font-size: 0.8rem;" class="grey-text">INSTALL VIA CLI</label>
+          <div class="grey lighten-4" style="padding: 10px; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; margin-top: 5px;">
+            <code id="install-code" class="green-text text-darken-2" style="font-family: monospace; white-space: nowrap; overflow-x: hidden;">ext install {{ site.theme_settings.publisher }}.{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}</code>
+            <a href="#!" onclick="copyInstall()" class="grey-text hoverable" style="padding: 4px; border-radius: 4px; display: flex; align-items: center;"><i class="material-icons" id="copy-icon" style="font-size: 1.2rem;">content_copy</i></a>
+          </div>
+        </div>
       </div>
-
-      <!-- Extension Name & Publisher -->
-      <h2 class="vsx-sidebar__name">{{ site.theme_settings.extension_name }}</h2>
-      <p class="vsx-sidebar__publisher"><small>{{ site.theme_settings.publisher }}</small></p>
-
-      <!-- Stats: Installs & Rating -->
-      <div class="vsx-stats">
-        <span class="vsx-stats__item">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/download.svg' | relative_url }}" alt="Downloads">
-          </span>
-          {{ site.theme_settings.installs }}
-        </span>
-        <span class="vsx-stats__item">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/star.svg' | relative_url }}" alt="Rating">
-          </span>
-          {{ site.theme_settings.rating }}
-        </span>
-        {% if site.theme_settings.license %}
-        <span class="vsx-stats__item">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/shield.svg' | relative_url }}" alt="License">
-          </span>
-          {{ site.theme_settings.license }}
-        </span>
-        {% endif %}
-      </div>
-
-      <!-- Install Buttons -->
-      <div class="vsx-actions">
-        <!-- Install in VS Code (opens vscode: URI) -->
-        <a href="vscode:extension/{{ site.theme_settings.publisher | downcase }}.{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}" class="vsx-btn vsx-btn--primary">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/vscode.svg' | relative_url }}" alt="VS Code">
-          </span>
-          Install in VS Code
-        </a>
-
-        <!-- Open in VS Code Marketplace -->
-        <a href="{{ site.theme_settings.marketplace_url }}" target="_blank" class="vsx-btn vsx-btn--secondary">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/vscode.svg' | relative_url }}" alt="VS Code">
-          </span>
-          VS Code Marketplace
-        </a>
-
-        <!-- Open VSX Registry -->
-        {% if site.theme_settings.openvsx_url %}
-        <a href="{{ site.theme_settings.openvsx_url }}" target="_blank" class="vsx-btn vsx-btn--outline">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/open-vsx.svg' | relative_url }}" alt="Open VSX">
-          </span>
-          Open VSX Registry
-        </a>
-        {% else %}
-        <a href="https://open-vsx.org/extension/{{ site.theme_settings.publisher | downcase }}/{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}" target="_blank" class="vsx-btn vsx-btn--outline">
-          <span class="vsx-icon">
-            <img src="{{ '/assets/icons/open-vsx.svg' | relative_url }}" alt="Open VSX">
-          </span>
-          Open VSX Registry
-        </a>
-        {% endif %}
-      </div>
-
-      <!-- Install Command -->
-      <div class="vsx-install-cmd">
-        <code id="install-code">ext install {{ site.theme_settings.publisher }}.{{ site.theme_settings.extension_name | downcase | replace: ' ', '-' }}</code>
-        <button class="vsx-install-cmd__copy" onclick="copyInstall()" aria-label="Copy install command" title="Copy to clipboard">
-          <span class="vsx-icon vsx-icon--lg" id="copy-icon">
-            <img src="{{ '/assets/icons/copy.svg' | relative_url }}" alt="Copy" id="copy-img">
-          </span>
-        </button>
-      </div>
-
-      <!-- Resources Links -->
-      <div class="vsx-resources">
-        <div class="vsx-resources__title">Resources</div>
-        <ul class="vsx-resources__list">
-          <li>
-            <a href="{{ site.theme_settings.marketplace_url }}" target="_blank">
-              <span class="vsx-icon">
-                <img src="{{ '/assets/icons/external-link.svg' | relative_url }}" alt="Link">
-              </span>
-              Marketplace
-            </a>
-          </li>
-          <li>
-            <a href="{{ site.theme_settings.github_repo }}" target="_blank">
-              <span class="vsx-icon">
-                <img src="{{ '/assets/icons/github.svg' | relative_url }}" alt="GitHub">
-              </span>
-              Repository
-            </a>
-          </li>
-          <li>
-            <a href="{{ site.theme_settings.github_repo }}/blob/main/CHANGELOG.md" target="_blank">
-              <span class="vsx-icon">
-                <img src="{{ '/assets/icons/changelog.svg' | relative_url }}" alt="Changelog">
-              </span>
-              Changelog
-            </a>
-          </li>
-          <li>
-            <a href="{{ site.theme_settings.github_repo }}/blob/main/LICENSE" target="_blank">
-              <span class="vsx-icon">
-                <img src="{{ '/assets/icons/shield.svg' | relative_url }}" alt="License">
-              </span>
-              License ({{ site.theme_settings.license }})
-            </a>
-          </li>
+      <div class="card-action">
+        <ul style="margin: 0;">
+          <li style="margin-bottom: 8px;"><a href="{{ site.theme_settings.marketplace_url }}" target="_blank" class="blue-text text-darken-2" style="display: flex; align-items: center;"><i class="material-icons tiny left" style="margin-right: 8px;">launch</i> Marketplace</a></li>
+          <li style="margin-bottom: 8px;"><a href="{{ site.theme_settings.github_repo }}" target="_blank" class="blue-text text-darken-2" style="display: flex; align-items: center;"><i class="material-icons tiny left" style="margin-right: 8px;">code</i> Repository</a></li>
+          <li style="margin-bottom: 8px;"><a href="{{ site.theme_settings.github_repo }}/blob/main/CHANGELOG.md" target="_blank" class="blue-text text-darken-2" style="display: flex; align-items: center;"><i class="material-icons tiny left" style="margin-right: 8px;">history</i> Changelog</a></li>
+          <li style="margin-bottom: 8px;"><a href="{{ site.theme_settings.github_repo }}/blob/main/LICENSE" target="_blank" class="blue-text text-darken-2" style="display: flex; align-items: center;"><i class="material-icons tiny left" style="margin-right: 8px;">verified_user</i> License</a></li>
           {% if site.theme_settings.github_repo %}
-          <li>
-            <a href="{{ site.theme_settings.github_repo }}/issues" target="_blank">
-              <span class="vsx-icon">
-                <img src="{{ '/assets/icons/issue.svg' | relative_url }}" alt="Issue">
-              </span>
-              Report Issue
-            </a>
-          </li>
+          <li><a href="{{ site.theme_settings.github_repo }}/issues" target="_blank" class="blue-text text-darken-2" style="display: flex; align-items: center;"><i class="material-icons tiny left" style="margin-right: 8px;">bug_report</i> Report Issue</a></li>
           {% endif %}
         </ul>
       </div>
-    </article>
+    </div>
   </div>
 
-  <div style="grid-column: span 2;">
-    <article class="readme-content">
-      {{ content }}
-    </article>
+  <!-- Main Content -->
+  <div class="col s12 l8">
+    <div class="card">
+      <div class="card-content readme-content">
+        {{ content }}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -146,14 +79,12 @@ layout: default
 function copyInstall() {
   const code = document.getElementById('install-code').innerText;
   navigator.clipboard.writeText(code).then(() => {
-    const imgEl = document.getElementById('copy-img');
-    const originalSrc = imgEl.src;
-    // Show checkmark
-    imgEl.src = '{{ "/assets/icons/checkmark.svg" | relative_url }}';
-    imgEl.parentElement.style.color = '#22c55e';
+    const iconEl = document.getElementById('copy-icon');
+    iconEl.innerText = 'check';
+    iconEl.classList.add('green-text');
     setTimeout(() => {
-      imgEl.src = originalSrc;
-      imgEl.parentElement.style.color = '';
+      iconEl.innerText = 'content_copy';
+      iconEl.classList.remove('green-text');
     }, 2000);
   });
 }
